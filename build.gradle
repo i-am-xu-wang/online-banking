@@ -1,0 +1,54 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "org.openapi.generator" version "5.1.1"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.rest-assured:spring-mock-mvc:4.4.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.3.3.RELEASE'
+	implementation 'org.springframework.data:spring-data-commons:2.3.3.RELEASE'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.2'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
+}
+
+test {
+	useJUnitPlatform()
+}
+openApiGenerate {
+	generatorName = "spring"
+	inputSpec = "$rootDir/openapi.yml".toString()
+	outputDir = "$buildDir/generated".toString()
+	apiPackage = "api"
+	invokerPackage = "invoker"
+	modelPackage = "model"
+	configOptions = [
+			dateLibrary: "java8"
+	]
+}
+
