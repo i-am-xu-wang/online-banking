@@ -35,16 +35,19 @@ public class OBTransactionAdapter {
     }
     private Double convertAmount(Transaction transaction, OBTransaction6 obTransaction6){
         double amount;
-
+        double rate;
         try{
             amount = Double.parseDouble(obTransaction6.getAmount().getAmount());
         }
         catch (Exception e){
-            return null;
+            return 0.0d;
         }
-
-        double rate = obTransaction6.getCurrencyExchange().getExchangeRate()
-            .doubleValue();
+        try{
+            rate = obTransaction6.getCurrencyExchange().getExchangeRate().doubleValue();
+        }
+        catch (Exception e){
+            rate = 1.0;
+        }
         return amount * rate;
     }
     private String convertMerchantName(Transaction transaction, OBTransaction6 obTransaction6){
