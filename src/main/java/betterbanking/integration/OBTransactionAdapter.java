@@ -4,7 +4,6 @@ import betterbanking.entity.Transaction;
 import model.OBTransaction6;
 
 import  java.util.Date;
-import java.time.OffsetDateTime;
 
 public class OBTransactionAdapter {
 
