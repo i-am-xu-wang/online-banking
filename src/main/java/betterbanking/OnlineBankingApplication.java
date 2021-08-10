@@ -19,7 +19,7 @@ public class OnlineBankingApplication {
 			.build();
 	}
 	//todo:double check the url
-	@Value("http://localhost:8080/}")
+	@Value("${io.betterbanking.integration.url-base}")
 	private String baseUrl;
 
 }

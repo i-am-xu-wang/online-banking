@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import betterbanking.web.TransactionController;
 import model.*;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+@SpringBootTest
 public class TransactionComponentTest {
     @LocalServerPort
     private int port;
@@ -34,6 +36,7 @@ public class TransactionComponentTest {
             .setResponseCode(200)
             .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .setBody(json));
+
         var t = Arrays.stream(given().standaloneSetup(new TransactionController(transactionService))
             .when()
             .get(String.format("http://localhost:%s/transactions/1234567", port))
@@ -46,6 +49,7 @@ public class TransactionComponentTest {
 
         assertEquals(100.0d, t.getAmount());
     }
+
     private OBReadTransaction6 transaction() {
         var t = new OBReadTransaction6();
         t.setData(new OBReadDataTransaction6());

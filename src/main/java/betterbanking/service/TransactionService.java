@@ -29,9 +29,8 @@ public class TransactionService {
             transactionApiClient.findAllByAccountNumber(accountNumber);
         for (Transaction transaction : transactions) {
             merchantDetailsRepository
-                .findMerchantLogo(transaction.getMerchantName()).ifPresent(logo -> {
-                    transaction.setMerchantLogo(logo);
-                });
+                .findMerchantLogo(transaction.getMerchantName()).ifPresent(
+                transaction::setMerchantLogo);
         }
         return transactions;
     }
