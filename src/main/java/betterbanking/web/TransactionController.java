@@ -21,14 +21,8 @@ public class TransactionController {
     }
 
     @GetMapping("/{accountNumber}")
-    public ResponseEntity<List<Transaction>> transactionsByAccountNumber(
-        @PathVariable("accountNumber") final Integer accountNumber) {
-        List<Transaction> transactions =
-            transactionService.findAllByAccountNumber(accountNumber);
-        if (!transactions.isEmpty()) {
-            return new ResponseEntity<>(transactions, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public List<Transaction> findAllByAccountNumber(@PathVariable("accountNumber") final Integer accountNumber) {
+        return transactionService.findAllByAccountNumber(accountNumber);
     }
 
 }
