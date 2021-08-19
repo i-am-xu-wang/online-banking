@@ -43,6 +43,11 @@ dependencies {
 	implementation 'javax.validation:validation-api:2.0.1.Final'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.cloud:spring-cloud-config-dependencies:3.0.1'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2', version: '2.2.4.RELEASE'
+	implementation 'org.springframework.security:spring-security-test'
+
 }
 
 test {
