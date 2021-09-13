@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 public class AuthorizationServerConfig extends
     AuthorizationServerConfigurerAdapter {
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
@@ -23,6 +25,5 @@ public class AuthorizationServerConfig extends
         endpoints.authenticationManager(authenticationManager);
     }
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
 }
